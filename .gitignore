@@ -3,6 +3,12 @@
 /node_modules
 /build
 
+# Nestjs specific
+/dist
+/node_modules
+/build
+/tmp
+
 # Logs
 logs
 *.log
@@ -41,6 +47,12 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 .env.local
+
+# dotenv environment variable files
+.env
+.env.development
+.env.test
+.env.production
 
 # temp directory
 .temp
