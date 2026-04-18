@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  vuln-db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: sqli_user
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: sqli_lab
+    ports:
+      - "5432:5432"
+    restart: always
