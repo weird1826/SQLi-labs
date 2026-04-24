@@ -1,24 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum ROLE {
-    ADMIN = 'ADMIN',
-    USER = 'USER'
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }
 
-@Entity()
+@Entity('users')
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id!: string;
 
-    @Column()
-    username: string;
+  @Column()
+  username!: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password!: string;
 
-    @Column({
-        type: 'enum',
-        enum: ROLE,
-    })
-    role: ROLE
+  @Column({
+    type: 'enum',
+    enum: ROLE,
+  })
+  role!: ROLE;
 }
