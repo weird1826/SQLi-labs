@@ -44,4 +44,18 @@ export class UsersService implements OnModuleInit {
       throw new InternalServerErrorException(message);
     }
   }
+
+  async level2(username: string): Promise<string> {
+    const query = `SELECT * FROM users WHERE username='${username}'`;
+    try {
+      const rows: User[] = await this.dataSource.query(query);
+      if (rows.length != 0) {
+        return 'User exists in the system';
+      }
+      return 'User does not exist in the system';
+    } catch {
+      const message = 'An error occurred.';
+      return message;
+    }
+  }
 }

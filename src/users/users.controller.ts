@@ -10,4 +10,9 @@ export class UsersController {
   async findOne(@Query('id') id: string): Promise<User[]> {
     return this.usersService.level1(id);
   }
+
+  @Get('/level2')
+  async level2(@Query('username') username: string): Promise<string> {
+    return this.usersService.level2(username);
+  }
 }
