@@ -58,4 +58,41 @@ export class UsersService implements OnModuleInit {
       return message;
     }
   }
+
+  async level3(sort: string): Promise<User[] | { message: string }> {
+    const query = `SELECT id, username, role FROM users ORDER BY ${sort}`;
+
+    try {
+      const result: User[] = await this.dataSource.query(query);
+      return result;
+    } catch {
+      return { message: 'Sort failed.' };
+    }
+  }
+
+  async level4UpdateNickname(id: string, nickname: string) {
+    try {
+      await this.usersRepository.update(id, { nickname: nickname });
+      return { message: `Nickname for user ${id} updated.` };
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : 'Unknown database error';
+      throw new InternalServerErrorException(message);
+    }
+  }
+
+  async level4FindPeers(id: string): Promise<User[] | { message: string }> {
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user || !user.nickname) return { message: 'User/Nickname not found.' };
+
+    const query = `SELECT username, role, nickname FROM users WHERE nickname='${user.nickname}'`;
+
+    try {
+      return await this.dataSource.query(query);
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : 'Unknown database error';
+      return { message };
+    }
+  }
 }

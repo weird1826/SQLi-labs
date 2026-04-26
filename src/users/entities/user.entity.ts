@@ -21,4 +21,7 @@ export class User {
     enum: ROLE,
   })
   role!: ROLE;
+
+  @Column({ nullable: true })
+  nickname!: string;
 }
